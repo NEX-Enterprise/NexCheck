@@ -5,6 +5,7 @@ body {
     color: #fff;
     overflow: hidden;
     background-color: #0d0d0d;
+    overflow-y: auto; /* Permitir desplazamiento vertical */
   }
   
   #background {
@@ -165,6 +166,135 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
   }
+
+  /* --- Estilo avanzado para el selector --- */
+.neon-select {
+  appearance: none;
+  background: #111;
+  color: #fff;
+  padding: 10px 20px;
+  border: 2px solid #ff00ff;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  position: relative;
+  text-shadow: 0 0 5px #ff00ff, 0 0 10px rgba(255, 0, 255, 0.5);
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3), inset 0 0 5px rgba(255, 0, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.neon-select:hover {
+  background: rgba(255, 0, 255, 0.1);
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.7), inset 0 0 8px rgba(255, 0, 255, 0.5);
+}
+
+.neon-select:focus {
+  border-color: #ff00ff;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.9), inset 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+/* Personalización del ícono desplegable */
+.neon-select::after {
+  content: "▼";
+  font-size: 12px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff00ff;
+  text-shadow: 0 0 5px #ff00ff;
+  pointer-events: none;
+}
+
+
+  /* --- Estilo para las asignaciones --- */
+.assignments {
+  margin-top: 40px;
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #ff00ff;
+  box-shadow: 0 0 20px #ff00ff, 0 0 50px rgba(255, 0, 255, 0.3);
+}
+
+.assignments h2 {
+  color: #ff00ff;
+  text-shadow: 0 0 20px #ff00ff;
+  margin-bottom: 10px;
+}
+
+#assignmentsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.assignment-card {
+  background: #222;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #ff00ff;
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
+.assignment-card h3 {
+  color: #ff00ff;
+}
+
+.assignment-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.assignment-card li {
+  margin: 5px 0;
+  padding: 5px;
+  background: #333;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
+}
+
+/* --- Estilo para las tareas individuales --- */
+.task-items li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #222;
+  color: #fff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.task-items li.completed {
+  text-decoration: line-through;
+  color: rgba(255, 0, 255, 0.5);
+  opacity: 0.7;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.task-buttons button {
+  background: none;
+  border: none;
+  color: #ff00ff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.task-buttons button:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+
   
   /* --- Pie de página --- */
   .footer {

@@ -1,32 +1,117 @@
-const taskInput = document.getElementById('taskInput');
-const addTaskButton = document.getElementById('addTaskButton');
-const tasks = document.getElementById('tasks');
+// Equipo y especialidades
+const teamMembers = [
+  { name: "Kevin", specialties: ["frontend", "UI/UX"] },
+  { name: "Brian", specialties: ["backend", "databases"] },
+  { name: "Yaisel", specialties: ["testing", "frontend"] },
+  { name: "Owen", specialties: ["testing", "frontend"] },
+];
 
-function addTask() {
-  const taskText = taskInput.value.trim();
-  if (!taskText) return;
+// Listas de tareas y asignaciones
+const tasks = [];
+let assignments = {};
 
-  const taskItem = document.createElement('li');
-  const taskContent = document.createElement('span');
-  taskContent.textContent = taskText;
+// Referencias del DOM
+const taskInput = document.getElementById("taskInput");
+const taskCategory = document.getElementById("taskCategory");
+const addTaskButton = document.getElementById("addTaskButton");
+const taskList = document.getElementById("tasks");
+const assignmentsContainer = document.getElementById("assignmentsContainer");
 
-  const completeButton = document.createElement('button');
-  completeButton.innerHTML = '<i class="fas fa-check"></i>';
-  completeButton.onclick = () => taskItem.classList.toggle('completed');
+// Agregar tarea
+addTaskButton.addEventListener("click", () => {
+  const description = taskInput.value.trim();
+  const category = taskCategory.value;
 
-  const deleteButton = document.createElement('button');
-  deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-  deleteButton.onclick = () => tasks.removeChild(taskItem);
+  if (description) {
+    // Agregar tarea al array
+    tasks.push({ description, category });
+    updateTaskList();
+    assignTasks();
+    taskInput.value = "";
+  }
+});
 
-  taskItem.appendChild(taskContent);
-  taskItem.appendChild(completeButton);
-  taskItem.appendChild(deleteButton);
-
-  tasks.appendChild(taskItem);
-  taskInput.value = '';
+// Actualizar lista de tareas
+function updateTaskList() {
+  taskList.innerHTML = tasks
+    .map(
+      (task, index) =>
+        `<li>${task.description} (${task.category})</li>`
+    )
+    .join("");
 }
 
-addTaskButton.onclick = addTask;
-taskInput.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') addTask();
-});
+// Asignar tareas
+function assignTasks() {
+  assignments = {}; // Reiniciar asignaciones
+
+  // Inicializar asignaciones para cada miembro
+  teamMembers.forEach((member) => {
+    assignments[member.name] = [];
+  });
+
+  // Asignar tareas según especialización
+  tasks.forEach((task) => {
+    const bestMatch = teamMembers.find((member) =>
+      member.specialties.includes(task.category)
+    );
+
+    if (bestMatch) {
+      assignments[bestMatch.name].push(task);
+    }
+  });
+
+  updateAssignments();
+}
+
+// Actualizar visualización de asignaciones
+function updateAssignments() {
+  assignmentsContainer.innerHTML = Object.entries(assignments)
+    .map(
+      ([member, tasks]) => `
+      <div class="assignment-card">
+        <h3>${member}</h3>
+        <ul>
+          ${tasks
+            .map((task) => `<li>${task.description} (${task.category})</li>`)
+            .join("")}
+        </ul>
+      </div>
+    `
+    )
+    .join("");
+}
+
+// Agregar tarea con botones de acción
+function updateTaskList() {
+  taskList.innerHTML = tasks
+    .map(
+      (task, index) => `
+      <li class="${task.completed ? "completed" : ""}">
+        ${task.description} (${task.category})
+        <div class="task-buttons">
+          <button onclick="toggleComplete(${index})" title="Marcar como completada">
+            <i class="fas ${task.completed ? "fa-undo" : "fa-check"}"></i>
+          </button>
+          <button onclick="deleteTask(${index})" title="Eliminar tarea">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </li>
+    `
+    )
+    .join("");
+}
+
+// Marcar tarea como completada o deshacer
+function toggleComplete(index) {
+  tasks[index].completed = !tasks[index].completed;
+  updateTaskList();
+}
+
+// Eliminar tarea
+function deleteTask(index) {
+  tasks.splice(index, 1); // Quitar la tarea de la lista
+  updateTaskList(); // Actualizar visualmente
+  assignTasks(); // Reasignar tareas
+}

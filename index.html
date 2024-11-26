@@ -30,6 +30,13 @@
         placeholder="Escribe tu tarea..." 
         class="neon-input" 
       />
+      <select id="taskCategory" class="neon-select">
+        <option value="frontend">Frontend</option>
+        <option value="backend">Backend</option>
+        <option value="UI/UX">UI/UX</option>
+        <option value="testing">Testing</option>
+        <option value="databases">Databases</option>
+      </select>      
       <button id="addTaskButton" class="neon-button">
         <i class="fas fa-plus"></i> Agregar
       </button>
@@ -38,7 +45,13 @@
     <!-- Lista de tareas -->
     <section class="task-list">
       <h2><i class="fas fa-tasks"></i> Tareas pendientes</h2>
-      <ul id="tasks"></ul>
+      <ul id="tasks" class="task-items"></ul>
+    </section>    
+
+    <!-- Asignaciones -->
+    <section class="assignments">
+      <h2><i class="fas fa-users"></i> Asignaciones</h2>
+      <div id="assignmentsContainer"></div>
     </section>
   </main>
 
