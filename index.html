@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nex Check</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Fondo animado -->
+  <div id="background">
+    <div class="glow-circle"></div>
+    <div class="glow-circle glow-circle-2"></div>
+  </div>
+
+  <!-- Encabezado -->
+  <header class="header">
+    <h1>Nex Check</h1>
+    <p>La herramienta definitiva para tus tareas diarias.</p>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="container">
+    <!-- Input de tareas -->
+    <section class="task-input">
+      <input 
+        type="text" 
+        id="taskInput" 
+        placeholder="Escribe tu tarea..." 
+        class="neon-input" 
+      />
+      <button id="addTaskButton" class="neon-button">
+        <i class="fas fa-plus"></i> Agregar
+      </button>
+    </section>
+
+    <!-- Lista de tareas -->
+    <section class="task-list">
+      <h2><i class="fas fa-tasks"></i> Tareas pendientes</h2>
+      <ul id="tasks"></ul>
+    </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="footer">
+    <p>Creado por <span>NEX</span>. Inspirando el futuro.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
